@@ -28,8 +28,8 @@ class Sticky{
         Sticky::Status distance();
         void goForward();
         void goBackward();
-        void goLeft();        //-//
-        void goRight();       //-//
+        void goLeft();        
+        void goRight();       
         void allStop();
         void avoidObstacleLeft();
         void avoidObstacleRight();
