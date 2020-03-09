@@ -3,36 +3,36 @@
 
 #include <Arduino.h>
 
-class Sticky{
-    enum class Status{
-      GoingForward,
-      GoingBackward,
-      Stop,
-      NoObstacle,
-      ObstacleDetected,
-      
-    };   
+class Sticky{ 
     
     private:
         byte leftMotorForwardPin, leftMotorBackwardPin, leftMotorSpeedPin;
         byte rightMotorForwardPin, rightMotorBackwardPin, rightMotorSpeedPin; 
         byte triggerPin, echoPin;
-        float distanaceFromObstacle;
-        float distanceMargain;
+        float distanceFromObstacle;
+        float distanceThreshold;
         
     public:
+        enum class Status{      
+          NoObstacle,
+          ObstacleDetected,
+        }; 
         Sticky(
-            byte leftMotorForwardPin, byte leftMotorBackwardPin, byte leftMotorSpeedPin,
-            byte rightMotorForwardPin, byte rightMotorBackwardPin, byte rightMotorSpeedPin,
-            byte echoPin, byte triggerPin);
+               byte leftMotorForwardPin, byte leftMotorBackwardPin, 
+               byte rightMotorForwardPin, byte rightMotorBackwardPin,
+               byte leftMotorSpeedPin, byte rightMotorSpeedPin,
+               byte echoPin, byte triggerPin);
             
         void initialize();
+        void distanceSettingCM(float distanceThreshold);
+        Sticky::Status distance();
         void goForward();
         void goBackward();
-        void goLeft();
-        void goRight();
+        void goLeft();        //-//
+        void goRight();       //-//
         void allStop();
-        Sticky::Status distance(float& distanceFromObstacle);
+        void avoidObstacleLeft();
+        void avoidObstacleRight();
 };
 
 #endif
